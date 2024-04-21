@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página de Registro</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fbfbfd;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        /* Registro */
+        .registro-card {
+            background-color: #1212a1fb;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+
+        .registro-card h2 {
+            color: #333;
+        }
+
+        .registro-form input,
+        .registro-form select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .registro-form button {
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        /* Estilo para ocultar los campos de monitor por defecto */
+        .monitor-fields {
+            display: none;
+        }
+
+        /* Estilo para mostrar mensaje de error */
+        .error-message {
+            color: red;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+        /* Estilo para mostrar mensaje de contraseña */
+        .password-message {
+            color: #777;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="registro-card">
+        <h2>Registro</h2>
+        <button class="button monitor" id="btnMonitor">Registrarse como Alumno</button>
+        <button class="button alumno" id="btnAlumno">Registrarse como Monitor</button>
+
+        <form class="registro-form" id="registroForm" method="POST">
+            <label for="nombre">Nombre(s)</label><br/>
+            <input type="text" id="nombre" name="nombre" placeholder="Ingresa tu(s) nombre(s)" required><br/>
+        
+            <label for="apellidoPaterno">Apellido Paterno</label><br/>
+            <input type="text" id="apellidoPaterno" name="apellidoPaterno" placeholder="Ingresa tu apellido paterno" required><br/>
+            
+            <label for="apellidoMaterno">Apellido Materno</label><br/>
+            <input type="text" id="apellidoMaterno" name="apellidoMaterno" placeholder="Ingresa tu apellido materno" required><br/>
+
+            <label for="clubDeportivo">Club Deportivo</label><br/>
+            <select id="clubDeportivo" name="clubDeportivo">
+                <option value="opcion1">Opción 1</option>
+                <option value="opcion2">Opción 2</option>
+                <option value="opcion3">Opción 3</option>
+            </select><br/>
+
+            <div class="monitor-fields">
+                <label for="tipo">Tipo</label><br/>
+                <select id="tipo" name="tipo">
+                    <option value="opcion1">Opción 1</option>
+                    <option value="opcion2">Opción 2</option>
+                    <option value="opcion3">Opción 3</option>
+                </select><br/>
+            </div>
+
+            <label for="usuario">Usuario</label><br/>
+            <input type="text" id="usuario" name="usuario" placeholder="Ingresa tu usuario"><br/>
+
+            <label for="contrasena">Contraseña</label><br/>
+            <input type="password" id="contrasena" name="contrasena" placeholder="Ingresa tu contraseña" required><br/>
+            <div class="password-message">(Debe contener: primera letra mayúscula, números, signos, 8 caracteres, y sin números consecutivos) Ejemplo: Contras3ñ@</div><br/>
+            
+            <label for="confirmarContrasena">Confirmar Contraseña</label><br/>
+            <input type="password" id="confirmarContrasena" name="confirmarContrasena" placeholder="Confirma tu contraseña" required><br/>
+
+            <div class="error-message" id="errorMessage"></div>
+            
+            <button type="submit">Registrarse</button>
+        </form>
+    </div>
+
+    <script>
+        // Función para validar la contraseña
+        function validarContrasena(contrasena) {
+            // Longitud de la contraseña
+            if (contrasena.length !== 8) {
+                return false;
+            }
+
+            // Primera letra en mayúscula
+            if (contrasena.charAt(0) !== contrasena.charAt(0).toUpperCase()) {
+                return false;
+            }
+
+            // Verificar si hay números consecutivos
+            for (let i = 0; i < contrasena.length - 1; i++) {
+                if (parseInt(contrasena.charAt(i)) + 1 === parseInt(contrasena.charAt(i + 1))) {
+                    return false;
+                }
+            }
+
+            // Verificar si hay al menos un número y un carácter especial
+            const tieneNumero = /\d/.test(contrasena);
+            const tieneCaracterEspecial = /[-!@#$%^&*()_+|~=`{}\[\]:";'<>?,.\/]/.test(contrasena);
+
+            if (!tieneNumero || !tieneCaracterEspecial) {
+                return false;
+            }
+
+            return true;
+        }
+
+        // Función para mostrar los campos de monitor y ocultar los de alumno
+        function mostrarCamposMonitor() {
+            const monitorFields = document.querySelector('.monitor-fields');
+            monitorFields.style.display = 'block';
+        }
+
+        // Función para mostrar los campos de alumno y ocultar los de monitor
+        function mostrarCamposAlumno() {
+            const monitorFields = document.querySelector('.monitor-fields');
+            monitorFields.style.display = 'none';
+        }
+
+        // Función para manejar el envío del formulario
+        function onSubmit(event) {
+            const contrasena = document.getElementById('contrasena').value;
+
+            if (!validarContrasena(contrasena)) {
+                event.preventDefault(); // Evitar el envío del formulario
+                document.getElementById('errorMessage').innerText = "La contraseña no cumple con los requisitos.";
+            }
+        }
+
+        // Agrega el evento click al botón de registro de monitor
+        document.getElementById('btnMonitor').addEventListener('click', function() {
+            mostrarCamposMonitor();
+            mostrarCamposAlumno();
+        });
+
+        // Agrega el evento click al botón de registro de alumno
+        document.getElementById('btnAlumno').addEventListener('click', function() {
+            mostrarCamposAlumno();
+            mostrarCamposMonitor();
+        });
+
+        // Agrega el evento submit al formulario de registro
+        document.getElementById('registroForm').addEventListener('submit', onSubmit);
+    </script>
+    
+</body>
+</html>

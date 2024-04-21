@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página de Inicio de Sesión</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fbfbfd;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        /*LOGIN*/
+        .login-card {
+            background-color: #111185fb;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+
+        .login-card h2 {
+            color: #333;
+        }
+
+        .login-card h3 {
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .login-form input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .login-form a {
+            color: #007bff;
+            text-decoration: none;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .login-form button {
+            color: #d61c1c;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .login-form button.alumno {
+            background-color: #007bff;
+        }
+
+        .login-form button.monitor {
+            background-color: #f0f0f0;
+        }
+
+        .login-form button.clicked {
+            background-color: green;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: 1px solid #000;
+            background-color: #f0f0f0;
+            margin: 10px;
+            border-radius: 5px;
+        }
+
+        /* Estilo para ocultar los botones de registro */
+        .registro-btns {
+            display: none;
+        }
+        .password-requirements {
+            font-size: 14px;
+            color: #777;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-card">
+        <button class="button alumno" id="btnAlumno">Estudiante</button>
+        <button class="button monitor" id="btnMonitor">Monitor</button>
+
+        <!-- Div para los botones de registro -->
+        <div class="registro-btns" id="registroBtns">
+            <button class="button registro" id="btnRegistroAlumno">Registrarse como Estudiante</button>
+            <button class="button registro" id="btnRegistroMonitor">Registrarse como Monitor</button>
+        </div>
+
+        <form class="login-form" id="loginForm" method="POST">
+            <label for="nombre">Nombre de Usuario</label><br/>
+            <input type="text" id="nombre" name="nombre" placeholder="Ingresa tu Usuario" required><br/>
+        
+            <label for="contrasena">Contraseña</label><br/>
+            <input type="password" id="contrasena" name="contrasena" placeholder="Ingresa tu Contraseña" required minlength="8" maxlength="8"><br/>
+            <!-- Agregar mensaje de requisitos de contraseña -->
+            <div class="password-requirements">La contraseña debe contener exactamente 8 caracteres.</div><br/>
+        
+            <button type="submit">Iniciar sesión</button>
+        </form>
+        
+        <!-- Botón de registro para nuevo usuario -->
+        <a href="registro.html" class="button registro" id="btnRegistroNuevo">Registrarse como Nuevo Usuario</a>
+
+    </div>
+
+    <script>
+        // Almacena el botón actualmente seleccionado
+        let botonSeleccionado = null;
+
+        // Función para manejar el clic en los botones
+        function handleClick(event) {
+            const boton = event.target;
+            
+            // Quita la clase "clicked" del botón previamente seleccionado, si existe
+            if (botonSeleccionado) {
+                botonSeleccionado.classList.remove('clicked');
+            }
+            
+            // Establece el botón actual como seleccionado
+            botonSeleccionado = boton;
+            
+            // Agrega la clase "clicked" al botón actual
+            botonSeleccionado.classList.add('clicked');
+
+            // Cambiar el texto del label según el botón seleccionado
+            if (boton.id === 'btnAlumno') {
+                document.querySelector('label[for="nombre"]').innerText = 'Número de Control';
+                document.getElementById('loginForm').action = 'estudiante.html';
+            } else {
+                document.querySelector('label[for="nombre"]').innerText = 'Nombre de Usuario';
+                document.getElementById('loginForm').action = 'monitor.html';
+            }
+        }
+
+        // Agrega el evento click a los botones
+        document.getElementById('btnAlumno').addEventListener('click', handleClick);
+        document.getElementById('btnMonitor').addEventListener('click', handleClick);
+
+        // Función para mostrar los botones de registro
+        function mostrarBotonesRegistro() {
+            document.getElementById('registroBtns').style.display = 'block';
+        }
+
+       // Verificar si el usuario no está registrado y mostrar los botones de registro
+        // Cambia la condición a tu lógica real para verificar si el usuario está registrado
+        if (false) {
+            mostrarBotonesRegistro();
+        }
+
+        // Función para manejar el clic en el botón de registro de nuevo usuario
+        document.getElementById('btnRegistroNuevo').addEventListener('click', function() {
+            // Ocultar los botones de registro anteriores
+            document.getElementById('registroBtns').style.display = 'none';
+
+            // Mostrar todos los botones de registro
+            document.getElementById('btnRegistroAlumno').style.display = 'block';
+            document.getElementById('btnRegistroMonitor').style.display = 'block';
+        });
+    </script>
+    
+</body>
+</html>
