@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Opciones del Club</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fbfbfd;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 130vh;
+        }
+
+        .club-options {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+
+        .club-options h2 {
+            color: #111;
+        }
+
+        .club-options a {
+            display: block;
+            color: #007bff;
+            text-decoration: none;
+            margin-bottom: 10px;
+        }
+
+        .club-options a:hover {
+            text-decoration: underline;
+        }
+
+        .document-viewer {
+            width: 100%;
+            height: 600px;
+            border: 1px solid #ccc;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="club-options">
+        <h2>BIENVENIDO MONITOR DE:</h2>
+        <div id="options">
+            <!-- Aquí se mostrarán las opciones -->
+        </div>
+        <iframe class="document-viewer" id="documentViewer" src="" frameborder="0"></iframe>
+    </div>
+
+    <script>
+        // Función para mostrar las opciones del club
+        function mostrarOpcionesClub(club) {
+            const optionsDiv = document.getElementById("options");
+            optionsDiv.innerHTML = ""; // Limpiar opciones anteriores
+
+            if (club === "Club A") {
+                // Opción 1: Lista de alumnos
+                const listaAlumnos = document.createElement("a");
+                listaAlumnos.href = "#";
+                listaAlumnos.textContent = "Ver lista de alumnos";
+                optionsDiv.appendChild(listaAlumnos);
+
+                // Opción 2: Documento de Word editable
+                const documentoEditable = document.createElement("a");
+                documentoEditable.href = "TecNM-VI-PO-003-03.docx";
+                documentoEditable.target = "_blank"; // Abrir en una nueva pestaña
+                documentoEditable.textContent = "ACREDITACION";
+                optionsDiv.appendChild(documentoEditable);
+
+                // Opción 3: Otro documento de Word editable
+                const otroDocumentoEditable = document.createElement("a");
+                otroDocumentoEditable.href = "TecNM-VI-PO-003-04_AGOSTO-DICIEMBRE2023.docx";
+                otroDocumentoEditable.target = "_blank"; // Abrir en una nueva pestaña
+                otroDocumentoEditable.textContent = "BOLETA DE CALIFICACIONES";
+                optionsDiv.appendChild(otroDocumentoEditable);
+            }
+
+            // Mostrar las opciones del club
+            document.querySelector(".club-options").style.display = "block";
+        }
+
+        // Simular inicio de sesión exitoso
+        const usuarioValido = true; // Suponiendo que el inicio de sesión fue exitoso
+
+        if (usuarioValido) {
+            const club = "Club A"; // Suponiendo que obtienes el club del monitor después de iniciar sesión
+            mostrarOpcionesClub(club);
+        }
+    </script>
+    
+</body>
+</html>
+
