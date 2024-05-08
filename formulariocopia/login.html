@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>login</title>
+
+    <style>
+      body {
+        background-color: #ffffff;
+        margin: 0;
+        padding: 0;
+      }
+      h1 {
+        text-align: center;
+        width: 50%;
+        margin: auto;
+        margin-top: 80px;
+      }
+      table {
+        border: 3px solid #3c3ff3;
+        padding: 60px 40px;
+        margin-top: 20px;
+        border-radius: 5px;
+        background-color: #4341d8;
+        box-shadow: 0 0 30px rgba(0, 0, 0, 0.863);
+      }
+    </style>
+  </head>
+  <body>
+
+    
+    <h1>Login</h1>
+
+    
+    <form action="login.php" name="" method="POST">
+      <table border="0" align="center">
+        <tr>
+          <td>
+            Alumno o Monitor:
+          </td>
+          <td>
+            <select id="Alumno_Monitor" name="Alumno_Monitor">
+              <option value="ALUMNO">ALUMNO</option>
+              <option value="MONITOR">MONITOR</option>            
+          </select><br/>
+          </td>
+        <tr>
+          <td>
+            Nombre de Usuario:
+          </td>
+          <td>
+            <label for="user"></label>
+            <input type="text" name="usuario" id="user" required  />
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Contraseña:
+          </td>
+          <td>
+            <label for="password"></label>
+            <input type="password" name="contraseña" id="password"  required />
+          </td>
+        </tr>
+        <!--<tr>
+          <td>
+            Repetir contraseña:
+          </td>
+          <td>
+            <label for="rep_pasword"></label>
+            <input type="pasword" name="rep_contraseña" id="rep_pasword"  required />
+          </td>
+        </tr>-->
+        <tr>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td align="center">
+            <input
+              type="submit"
+              name="enviar"
+              id="enviar"
+              value="Registrarse"
+            />
+          </td>
+          <td align="center">
+            <input type="reset" name="borrar" id="borrar" value="Restablecer" />
+          </td>
+        </tr>
+      </table>
+    </form>
+  </body>
+</html>
